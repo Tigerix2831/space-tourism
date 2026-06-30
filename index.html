@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Space Tourism</title>
+</head>
+<body>
+  <header class="site-header">
+    <div class="site-brand">
+      <a href="#" class="logo">
+        <img src="assets/shared/logo.svg" alt="Space Tourism logo">
+      </a>
+    </div>
+    <nav class="site-nav">
+      <ul class="nav-actions">
+        <li><a href="#destination" class="nav-button">Planet View</a></li>
+        <li><a href="#guidebook" class="nav-button">Download Guidebook</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="hero-section">
+    <div class="hero-inner">
+      <section class="selected-planet">
+        <div class="planet-image">
+          <img src="assets/destination/image-moon.webp" alt="Moon" class="planet-photo planet-photo--moon">
+          <img src="assets/destination/image-mars.webp" alt="Mars" class="planet-photo planet-photo--mars">
+          <img src="assets/destination/image-europa.webp" alt="Europa" class="planet-photo planet-photo--europa">
+          <img src="assets/destination/image-titan.webp" alt="Titan" class="planet-photo planet-photo--titan">
+        </div>
+
+        <div class="planet-copy">
+          <div class="planet-content planet-content--moon">
+            <span class="hero-label">01 PICK YOUR DESTINATION</span>
+            <h1 class="planet-title">MOON</h1>
+            <p class="planet-description">
+              See our planet as you’ve never seen it before. A perfect relaxing trip away to help regain perspective and come back refreshed. While you’re there, take in some history by visiting the Luna 2 and Apollo 11 landing sites.
+            </p>
+            <div class="planet-stats">
+              <div class="stat-block">
+                <span class="stat-label">AVG. DISTANCE</span>
+                <span class="stat-value">384,400 KM</span>
+              </div>
+              <div class="stat-block">
+                <span class="stat-label">EST. TRAVEL TIME</span>
+                <span class="stat-value">3 DAYS</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="planet-content planet-content--mars">
+            <span class="hero-label">01 PICK YOUR DESTINATION</span>
+            <h1 class="planet-title">MARS</h1>
+            <p class="planet-description">
+              Mars is a rugged red world of ancient valleys and towering volcanoes. Explore Martian plains that once held water, then unwind under sunsets that glow with copper and rose.
+            </p>
+            <div class="planet-stats">
+              <div class="stat-block">
+                <span class="stat-label">AVG. DISTANCE</span>
+                <span class="stat-value">384,400 KM</span>
+              </div>
+              <div class="stat-block">
+                <span class="stat-label">EST. TRAVEL TIME</span>
+                <span class="stat-value">3 DAYS</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="planet-content planet-content--europa">
+            <span class="hero-label">01 PICK YOUR DESTINATION</span>
+            <h1 class="planet-title">EUROPA</h1>
+            <p class="planet-description">
+              Europa is a frozen ocean moon with an alien surface of ice and cracks. Venture past the icy crust in your imagination and discover the possibility of a hidden ocean glowing beneath.
+            </p>
+            <div class="planet-stats">
+              <div class="stat-block">
+                <span class="stat-label">AVG. DISTANCE</span>
+                <span class="stat-value">384,400 KM</span>
+              </div>
+              <div class="stat-block">
+                <span class="stat-label">EST. TRAVEL TIME</span>
+                <span class="stat-value">3 DAYS</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="planet-content planet-content--titan">
+            <span class="hero-label">01 PICK YOUR DESTINATION</span>
+            <h1 class="planet-title">TITAN</h1>
+            <p class="planet-description">
+              Titan is a mysterious, orange-hued moon wrapped in a thick atmosphere. It is a home away from home with methane skies, sulphur deserts, and dramatic views of Saturn’s rings.
+            </p>
+            <div class="planet-stats">
+              <div class="stat-block">
+                <span class="stat-label">AVG. DISTANCE</span>
+                <span class="stat-value">384,400 KM</span>
+              </div>
+              <div class="stat-block">
+                <span class="stat-label">EST. TRAVEL TIME</span>
+                <span class="stat-value">3 DAYS</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+        <aside class="planet-selector">
+        <input type="radio" id="planet-moon" name="planet" checked hidden>
+        <input type="radio" id="planet-mars" name="planet" hidden>
+        <input type="radio" id="planet-europa" name="planet" hidden>
+        <input type="radio" id="planet-titan" name="planet" hidden>
+
+        <div class="planet-buttons">
+            <label for="planet-moon" class="planet-button">Moon</label>
+            <label for="planet-mars" class="planet-button">Mars</label>
+            <label for="planet-europa" class="planet-button">Europa</label>
+            <label for="planet-titan" class="planet-button">Titan</label>
+        </div>
+        </aside>
+    </div>
+  </main>
+  <script>
+    const planetRadios = document.querySelectorAll('input[name="planet"]');
+    const planetPhotos = document.querySelectorAll('.planet-photo');
+    const planetContents = document.querySelectorAll('.planet-content');
+    const planetButtons = document.querySelectorAll('.planet-button');
+
+    function setActivePlanet(planetId) {
+    planetPhotos.forEach(photo => {
+        photo.classList.toggle('active', photo.classList.contains(`planet-photo--${planetId}`));
+    });
+
+    planetContents.forEach(content => {
+        content.classList.toggle('active', content.classList.contains(`planet-content--${planetId}`));
+    });
+
+    planetButtons.forEach(button => {
+        button.classList.toggle('active', button.getAttribute('for') === `planet-${planetId}`);
+    });
+    }
+
+    planetRadios.forEach(radio => {
+    radio.addEventListener('change', () => {
+        if (radio.checked) {
+        const planetId = radio.id.replace('planet-', '');
+        setActivePlanet(planetId);
+        }
+    });
+    });
+
+    const initialRadio = document.querySelector('input[name="planet"]:checked');
+    if (initialRadio) {
+    setActivePlanet(initialRadio.id.replace('planet-', ''));
+    }
+  </script>
+</body>
+</html>
